@@ -7,27 +7,30 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import { StyleSheet, View, Text, StatusBar, Image } from 'react-native';
+import FormInput from './app/components/FormInput';
+import SignIn from './app/screens/SignIn';
 
 function App() {
-  return(
-    <View style={styles.container}>
-      <Text>Testing</Text>
-    </View>
-  );
+  return <SignIn />;
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'blue'
+    padding: 50,
+    justifyContent: 'center',
+    alignSelf: 'stretch'
+  },
+  logo: {
+    alignSelf: 'center',
+    width: '100%',
+    height: 220
+  },
+  header: {
+    marginBottom: 15,
+    alignSelf: 'center',
+    fontSize: 20
   }
 });
 
