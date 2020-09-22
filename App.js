@@ -8,11 +8,11 @@
 
 import React from 'react';
 import { StyleSheet, View, Text, StatusBar, Image } from 'react-native';
-import FormInput from './app/components/FormInput';
 import SignIn from './app/screens/SignIn';
+import MainFrame from './app/screens/main/MainFrame';
 
 function App() {
-  return <SignIn />;
+  return <MainFrame />;
 }
 
 const styles = StyleSheet.create({
