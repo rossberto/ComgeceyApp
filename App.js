@@ -9,7 +9,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, StatusBar, Image } from 'react-native';
 import SignIn from './app/screens/SignIn';
-import MainFrame from './app/screens/main/MainFrame';
+import MainFrame from './app/screens/MainFrame';
 
 function App() {
   return <MainFrame />;
