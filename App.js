@@ -8,11 +8,29 @@
 
 import React from 'react';
 import { StyleSheet, View, Text, StatusBar, Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import SignIn from './app/screens/SignIn';
 import MainFrame from './app/screens/MainFrame';
 
+const Stack = createStackNavigator();
+
 function App() {
-  return <MainFrame />;
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Credenciales"
+          component={SignIn}
+        />
+        <Stack.Screen
+          name="Perfil"
+          component={MainFrame}
+          options={{ title: 'Bienvenido' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
 
 const styles = StyleSheet.create({

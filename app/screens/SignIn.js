@@ -11,7 +11,7 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import FormInput from '../components/FormInput';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-function SignIn() {
+function SignIn({ navigation }) {
   return(
     <View style={styles.container}>
       <Image
@@ -22,10 +22,10 @@ function SignIn() {
       <Text style={styles.header}>Ingreso</Text>
       <FormInput name="Correo Electrónico" id="email" />
       <FormInput name="Contraseña" id="password"/>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Perfil', { name: 'nombreee' })} >
         <Text style={styles.buttonText}>INGRESAR</Text>
       </TouchableOpacity>
-      <Text style={styles.forgot} accessibilityRole="button" onPress={() => console.log('hola')}>¿Olvidaste tu contraseña?</Text>
+      <Text style={styles.forgot} accessibilityRole="button">¿Olvidaste tu contraseña?</Text>
     </View>
   );
 }
