@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
   },
   username: {
     alignSelf: 'center',
-    fontSize: 25
+    fontSize: 25,
+    paddingTop: 10
   },
   userlocation: {
     alignSelf: 'center',
