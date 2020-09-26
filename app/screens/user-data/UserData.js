@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import IdData from './IdData';
 import AddressData from './AddressData';
 import ProfessionalData from './ProfessionalData';
 
-function UserData() {
+
+function UserData({ navigation }) {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -15,7 +15,7 @@ function UserData() {
 
       <View style={styles.divisor} />
 
-      <IdData />
+      <IdData navigation={navigation} />
 
       <View style={styles.divisor} />
 
