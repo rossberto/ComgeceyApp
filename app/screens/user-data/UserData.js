@@ -19,11 +19,11 @@ function UserData({ navigation }) {
 
       <View style={styles.divisor} />
 
-      <AddressData />
+      <AddressData navigation={navigation} />
 
       <View style={styles.divisor} />
 
-      <ProfessionalData />
+      <ProfessionalData navigation={navigation} />
     </ScrollView>
   );
 }

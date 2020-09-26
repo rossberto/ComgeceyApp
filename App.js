@@ -1,27 +1,36 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, StatusBar, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SignIn from './app/screens/SignIn';
 import HomeTabs from './app/screens/HomeTabs';
+import IdDataEdit from './app/screens/user-data-edit/IdDataEdit';
+import AddressDataEdit from './app/screens/user-data-edit/AddressDataEdit';
+import ProfessionalDataEdit from './app/screens/user-data-edit/ProfessionalDataEdit';
 
 const Stack = createStackNavigator();
 
-function IdEdit() {
+function HeaderLeft({ title }) {
   return (
-    <View>
-      <Text>En edición de Id</Text>
-    </View>
+      <Text style={styles.header}>{title}</Text>
   );
 }
+
+const screens = [
+  {
+    title: 'Ficha de Identificación',
+    component: IdDataEdit
+  },
+  {
+    title: 'Domicilio',
+    component: AddressDataEdit
+  },
+  {
+    title: 'Profesional',
+    component: ProfessionalDataEdit
+  }
+];
 
 function App() {
   const [signed, setSigned] = useState(true);
@@ -29,9 +38,26 @@ function App() {
   return (
     <NavigationContainer>
         {signed ? (
-          <Stack.Navigator headerMode="none">
-            <Stack.Screen name="Home" component={HomeTabs} />
-            <Stack.Screen name="Editar Id" component={IdEdit} />
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeTabs} options={
+              {
+                headerShown: false
+              }
+            }  />
+
+          {screens.map(screen => {
+            return (
+              <Stack.Screen
+                key={screen.title}
+                name={screen.title}
+                component={screen.component}
+                options={({ navigation, route }) => ({
+                  headerTitle: props => <HeaderLeft title={screen.title} {...props} />
+                })}
+              />
+            );
+          })}
+
           </Stack.Navigator>
           ):
           <Stack.Navigator headerMode="none">
@@ -58,9 +84,14 @@ const styles = StyleSheet.create({
     height: 220
   },
   header: {
-    marginBottom: 15,
     alignSelf: 'center',
-    fontSize: 20
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  navheader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   }
 });
 

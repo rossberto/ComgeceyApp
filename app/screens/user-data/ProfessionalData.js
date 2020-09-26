@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-function ProfessionalData() {
+function ProfessionalData({ navigation }) {
   return (
     <View style={styles.section}>
       <View>
         <View style={styles.header}>
           <Text style={styles.sectionheader}>Profesional</Text>
-          <Icon style={styles.icon} name="edit" size={30} color="black" />
+          <Icon style={styles.icon} name="edit" size={30} color="black" onPress={() => navigation.navigate('Profesional', { name: 'Profesional' })} />
         </View>
         <View style={styles.subsection}>
             <Text style={styles.subsectionheader}>Licenciatura</Text>

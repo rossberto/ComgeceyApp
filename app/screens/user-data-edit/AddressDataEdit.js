@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-function AddressData() {
+function AddressDataEdit({ navigation }) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.navtouch}>
+          <Icon style={styles.icon} name="save" size={30} color="black" />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
+
   const [selected, setSelected] = useState('Particular');
 
   return (
@@ -48,7 +58,10 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     marginBottom: 10
+  },
+  navtouch: {
+    padding: 10
   }
 });
 
-export default AddressData;
+export default AddressDataEdit;

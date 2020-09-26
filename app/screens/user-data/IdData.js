@@ -7,7 +7,7 @@ function IdData({ navigation }) {
     <View style={styles.section}>
       <View style={styles.header}>
         <Text style={styles.sectionheader}>Ficha de Identificación</Text>
-        <Icon style={styles.icon} name="edit" size={30} color="black" onPress={() => navigation.navigate('Editar Id', { name: 'edita' })} />
+        <Icon style={styles.icon} name="edit" size={30} color="black" onPress={() => navigation.navigate('Ficha de Identificación', { name: 'Ficha de Identificación' })} />
       </View>
       <View>
         <Text>Roberto Ross León</Text>

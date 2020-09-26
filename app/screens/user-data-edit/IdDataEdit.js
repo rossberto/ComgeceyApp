@@ -1,20 +1,28 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import FormInput from '../../components/FormInput';
 
-function IdData({ navigation }) {
+function IdDataEdit({ navigation }) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.navtouch}>
+          <Icon style={styles.icon} name="save" size={30} color="black" />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
+
   return (
-    <View style={styles.section}>
-      <View style={styles.header}>
-        <Text style={styles.sectionheader}>Ficha de Identificación</Text>
-        <Icon style={styles.icon} name="edit" size={30} color="black" onPress={() => navigation.navigate('Editar Id', { name: 'edita' })} />
-      </View>
-      <View>
-        <Text>Roberto Ross León</Text>
-        <Text>22-06-1982</Text>
-        <Text>Mérida, Yucatán</Text>
-      </View>
-    </View>
+    <ScrollView style={styles.section}>
+        <FormInput name="Nombre"></FormInput>
+        <FormInput name="Apellido Paterno"></FormInput>
+        <FormInput name="Apellido Materno"></FormInput>
+        <FormInput name="Fecha de Nacimiento"></FormInput>
+        <FormInput name="Estado de Nacimiento"></FormInput>
+        <FormInput name="Ciudad de Nacimiento"></FormInput>
+    </ScrollView>
   );
 }
 
@@ -24,13 +32,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   section: {
-    paddingVertical: 10
+    padding: 10
   },
   sectionheader: {
     fontSize: 15,
     fontWeight: 'bold',
     marginBottom: 10
+  },
+  navtouch: {
+    padding: 10
   }
 });
 
-export default IdData;
+export default IdDataEdit;

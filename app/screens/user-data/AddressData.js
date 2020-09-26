@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-function AddressData() {
+function AddressData({ navigation }) {
   const [selected, setSelected] = useState('Particular');
 
   return (
     <View style={styles.section}>
       <View style={styles.header}>
         <Text style={styles.sectionheader}>Domicilio</Text>
-        <Icon style={styles.icon} name="edit" size={30} color="black" />
+        <Icon style={styles.icon} name="edit" size={30} color="black" onPress={() => navigation.navigate('Domicilio', { name: 'Domicilio' })} />
       </View>
       <View style={styles.selector}>
         <Text style={selected === 'Particular' ? styles.selected : {color: '#7a6800'}} onPress={() => setSelected('Particular')}>Particular</Text>

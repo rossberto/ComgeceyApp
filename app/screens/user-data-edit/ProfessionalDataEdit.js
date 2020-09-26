@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-function ProfessionalData() {
+function ProfessionalDataEdit({ navigation }) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.navtouch}>
+          <Icon style={styles.icon} name="save" size={30} color="black" />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.section}>
       <View>
@@ -70,7 +80,10 @@ const styles = StyleSheet.create({
   },
   field: {
     color: '#7a6800'
+  },
+  navtouch: {
+    padding: 10
   }
 });
 
-export default ProfessionalData;
+export default ProfessionalDataEdit;
