@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import FormInput from '../../components/FormInput';
 
 function ProfessionalDataEdit({ navigation }) {
   React.useLayoutEffect(() => {
@@ -14,69 +15,30 @@ function ProfessionalDataEdit({ navigation }) {
   }, [navigation]);
 
   return (
-    <View style={styles.section}>
-      <View>
-        <View style={styles.header}>
-          <Text style={styles.sectionheader}>Profesional</Text>
-          <Icon style={styles.icon} name="edit" size={30} color="black" />
-        </View>
-        <View style={styles.subsection}>
-            <Text style={styles.subsectionheader}>Licenciatura</Text>
+    <ScrollView style={styles.section}>
+        <FormInput name="Escuela donde estudió la licenciatura"></FormInput>
+        <FormInput name="Fecha de inicio de la licenciatura"></FormInput>
+        <FormInput name="Fecha de término de la licenciatura"></FormInput>
+        <FormInput name="Título de la tesis"></FormInput>
+        <FormInput name="Tipo de examen (oral/escrito)"></FormInput>
+        <FormInput name="Cédula profesional"></FormInput>
+        <FormInput name="Fecha de expedición de la cédula"></FormInput>
+        <FormInput name="Libro, fojas y número"></FormInput>
 
-            <Text style={styles.field}>Escuela donde estudió la licenciatura:</Text>
-            <Text>Instituto Tecnológico de Mérida</Text>
-            <Text>Del 02-01-2001 al 06-09-2007</Text>
+        <FormInput name="Sitio donde realizó el internado"></FormInput>
+        <FormInput name="Fecha de inicio del internado"></FormInput>
+        <FormInput name="Fecha de término del internado"></FormInput>
 
-            <Text style={styles.field}>Título de la tesis:</Text>
-            <Text>Codificadores iLBC y Speex</Text>
-
-            <Text style={styles.field}>Tipo de examen (Oral y/o Escrito):</Text>
-            <Text>Oral y Escrito</Text>
-
-            <Text style={styles.field}>Cédula Profesional:</Text>
-            <Text>1234535</Text>
-
-            <Text style={styles.field}>Fecha de Expedición de Cédula:</Text>
-            <Text>06-06-2007</Text>
-
-            <Text style={styles.field}>Libro, Fojas y Número:</Text>
-            <Text>Libro 34 fojas 123-234</Text>
-        </View>
-
-        <View style={styles.subsection}>
-            <Text style={styles.subsectionheader}>Internado y Servicio Social</Text>
-
-            <Text style={styles.field}>Sitio donde realizó el internado:</Text>
-            <Text>Hospital Juárez</Text>
-            <Text>Del 02-01-2001 al 06-09-2007</Text>
-
-            <Text style={styles.field}>Lugar donde realizó el servicios social:</Text>
-            <Text>Catmis</Text>
-            <Text>Del 02-01-2001 al 06-09-2007</Text>
-        </View>
-      </View>
-    </View>
+        <FormInput name="Lugar donde realizó el servicio social"></FormInput>
+        <FormInput name="Fecha de inicio del servicio social"></FormInput>
+        <FormInput name="Fecha de término del servicio social"></FormInput>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   section: {
-    paddingVertical: 10
-  },
-  sectionheader: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    marginBottom: 10
-  },
-  subsection: {
-    marginBottom: 5
-  },
-  subsectionheader: {
-    fontWeight: 'bold'
+    padding: 10
   },
   field: {
     color: '#7a6800'

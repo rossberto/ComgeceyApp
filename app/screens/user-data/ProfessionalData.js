@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 function ProfessionalData({ navigation }) {
@@ -8,7 +8,9 @@ function ProfessionalData({ navigation }) {
       <View>
         <View style={styles.header}>
           <Text style={styles.sectionheader}>Profesional</Text>
-          <Icon style={styles.icon} name="edit" size={30} color="black" onPress={() => navigation.navigate('Profesional', { name: 'Profesional' })} />
+          <TouchableOpacity style={styles.navtouch} onPress={() => navigation.navigate('Profesional', { name: 'Profesional' })}>
+            <Icon style={styles.icon} name="edit" size={30} color="black" />
+          </TouchableOpacity>
         </View>
         <View style={styles.subsection}>
             <Text style={styles.subsectionheader}>Licenciatura</Text>
@@ -70,6 +72,9 @@ const styles = StyleSheet.create({
   },
   field: {
     color: '#7a6800'
+  },
+  navtouch: {
+    paddingHorizontal: 10
   }
 });
 

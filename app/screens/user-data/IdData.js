@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 function IdData({ navigation }) {
@@ -7,7 +7,9 @@ function IdData({ navigation }) {
     <View style={styles.section}>
       <View style={styles.header}>
         <Text style={styles.sectionheader}>Ficha de Identificación</Text>
-        <Icon style={styles.icon} name="edit" size={30} color="black" onPress={() => navigation.navigate('Ficha de Identificación', { name: 'Ficha de Identificación' })} />
+        <TouchableOpacity style={styles.navtouch} onPress={() => navigation.navigate('Ficha de Identificación', { name: 'Ficha de Identificación' })}>
+          <Icon style={styles.icon} name="edit" size={30} color="black" />
+        </TouchableOpacity>
       </View>
       <View>
         <Text>Roberto Ross León</Text>
@@ -30,6 +32,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     marginBottom: 10
+  },
+  navtouch: {
+    paddingHorizontal: 10
   }
 });
 

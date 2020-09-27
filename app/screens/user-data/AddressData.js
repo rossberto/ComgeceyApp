@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 function AddressData({ navigation }) {
@@ -9,7 +9,9 @@ function AddressData({ navigation }) {
     <View style={styles.section}>
       <View style={styles.header}>
         <Text style={styles.sectionheader}>Domicilio</Text>
-        <Icon style={styles.icon} name="edit" size={30} color="black" onPress={() => navigation.navigate('Domicilio', { name: 'Domicilio' })} />
+        <TouchableOpacity style={styles.navtouch} onPress={() => navigation.navigate('Domicilio', { name: 'Domicilio' })} >
+          <Icon style={styles.icon} name="edit" size={30} color="black" />
+        </TouchableOpacity>
       </View>
       <View style={styles.selector}>
         <Text style={selected === 'Particular' ? styles.selected : {color: '#7a6800'}} onPress={() => setSelected('Particular')}>Particular</Text>
@@ -48,6 +50,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     marginBottom: 10
+  },
+  navtouch: {
+    paddingHorizontal: 10
   }
 });
 

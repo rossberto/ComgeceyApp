@@ -27,17 +27,8 @@ function IdDataEdit({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   section: {
     padding: 10
-  },
-  sectionheader: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    marginBottom: 10
   },
   navtouch: {
     padding: 10
