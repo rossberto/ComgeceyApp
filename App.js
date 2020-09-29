@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View, Text, StatusBar, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { NavigationContainer } from '@react-navigation/native';
@@ -8,6 +8,7 @@ import HomeTabs from './app/screens/HomeTabs';
 import IdDataEdit from './app/screens/user-data-edit/IdDataEdit';
 import AddressDataEdit from './app/screens/user-data-edit/AddressDataEdit';
 import ProfessionalDataEdit from './app/screens/user-data-edit/ProfessionalDataEdit';
+import AppContext from './AppContext';
 
 const Stack = createStackNavigator();
 
@@ -33,9 +34,20 @@ const screens = [
 ];
 
 function App() {
-  const [signed, setSigned] = useState(true);
+  const appContext = useContext(AppContext);
+  const [signed, setSigned] = useState(false);
+
+  const handleSignIn = () => {
+    setSigned(true);
+  }
 
   return (
+    <AppContext.Provider
+      value={{
+        signed,
+        setSigned
+      }}
+    >
     <NavigationContainer>
         {signed ? (
           <Stack.Navigator>
@@ -68,6 +80,7 @@ function App() {
           </Stack.Navigator>
         }
     </NavigationContainer>
+    </AppContext.Provider>
   );
 }
 
