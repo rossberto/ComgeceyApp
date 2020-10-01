@@ -5,9 +5,10 @@ import AppContext from '../../AppContext';
 
 function Menu() {
   const appContext = useContext(AppContext);
-  const { setSigned } = appContext;
+  const { setSigned, setUserData } = appContext;
 
   const handleSignOut = () => {
+    setUserData({});
     setSigned(false);
   }
 

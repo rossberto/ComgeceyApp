@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 
 function FormInput(props) {
   const [value, setValue] = useState('');
+
+  useEffect(() => {
+    props.handleValueChange(value);
+  }, [value]);
 
   return (
     <View style={styles.container}>
@@ -12,7 +16,7 @@ function FormInput(props) {
       <TextInput
         style={styles.input}
         placeholder={props.name}
-        onChangeText={text => setValue(text)}
+        onChangeText={input => setValue(input)}
         value={value}
         autoCompleteType={props.id}
         secureTextEntry={props.id === 'password' ? true : false }

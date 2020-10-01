@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, View, Text, StatusBar, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { NavigationContainer } from '@react-navigation/native';
@@ -35,7 +35,13 @@ const screens = [
 
 function App() {
   const appContext = useContext(AppContext);
+
   const [signed, setSigned] = useState(false);
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
 
   const handleSignIn = () => {
     setSigned(true);
@@ -45,7 +51,9 @@ function App() {
     <AppContext.Provider
       value={{
         signed,
-        setSigned
+        setSigned,
+        userData,
+        setUserData
       }}
     >
     <NavigationContainer>
