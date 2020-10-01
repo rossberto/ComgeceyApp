@@ -1,9 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import axios from 'axios';
+import { apiUrl } from '../../apiUrl';
+import { API_SECRET } from "@env";
+import AppContext from '../../../AppContext';
+
+const baseUrl = apiUrl + 'users/';
 
 function AddressData({ navigation }) {
-  const [selected, setSelected] = useState('Particular');
+  const [endpoint, setEndpoint] = useState('/mail');
+  const { userId } = useContext(AppContext);
+  const [info, setInfo] = useState({
+    street: '',
+    number: '',
+    town: '',
+    city: '',
+    state: '',
+    zip_code: '',
+    phone: ''
+  });
+
+  useEffect(() => {
+    const url = baseUrl + userId + endpoint;
+
+    axios.get(url).then(response => {
+      if (Object.keys(response.data)[0] === 'address') {
+        setInfo(response.data.address);
+      } else if (Object.keys(response.data)[0] === 'mail') {
+        setInfo(response.data.mail);
+      }
+
+      //setFetched(true);
+    }).catch(err => {
+      console.log(err);
+    });
+  }, [endpoint]);
 
   return (
     <View style={styles.section}>
@@ -14,13 +46,13 @@ function AddressData({ navigation }) {
         </TouchableOpacity>
       </View>
       <View style={styles.selector}>
-        <Text style={selected === 'Particular' ? styles.selected : {color: '#7a6800'}} onPress={() => setSelected('Particular')}>Particular</Text>
-        <Text style={selected === 'Correspondencia' ? styles.selected : {color: '#7a6800'}} onPress={() => setSelected('Correspondencia')}>Correspondencia</Text>
+        <Text style={endpoint === '/address' ? styles.selected : {color: '#7a6800'}} onPress={() => setEndpoint('/address')}>Particular</Text>
+        <Text style={endpoint === '/mail' ? styles.selected : {color: '#7a6800'}} onPress={() => setEndpoint('/mail')}>Correspondencia</Text>
       </View>
       <View>
-        <Text>Calle 123 #345, Francisco de Montejo</Text>
-        <Text>CP 97123, Mérida, Yucatán</Text>
-        <Text>9992255874</Text>
+        <Text>{info.street} #{info.number}, {info.town}</Text>
+        <Text>CP {info.zip_code}, {info.city}, {info.state}</Text>
+        <Text>{info.phone}</Text>
       </View>
     </View>
   );

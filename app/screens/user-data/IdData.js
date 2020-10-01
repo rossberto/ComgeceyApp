@@ -1,8 +1,12 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import AppContext from '../../../AppContext';
 
 function IdData({ navigation }) {
+  const appContext = useContext(AppContext);
+  const { userInfo } = appContext.userData;
+
   return (
     <View style={styles.section}>
       <View style={styles.header}>
@@ -12,9 +16,9 @@ function IdData({ navigation }) {
         </TouchableOpacity>
       </View>
       <View>
-        <Text>Roberto Ross León</Text>
-        <Text>22-06-1982</Text>
-        <Text>Mérida, Yucatán</Text>
+        <Text>{userInfo.name} {userInfo.father_lname} {userInfo.mother_lname}</Text>
+        <Text>{userInfo.birthdate}</Text>
+        <Text>{userInfo.birth_city}, {userInfo.birth_state}</Text>
       </View>
     </View>
   );

@@ -13,37 +13,29 @@ import FormInput from '../components/FormInput';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AppContext from '../../AppContext';
 import { apiUrl } from '../apiUrl';
+import { API_SECRET } from "@env";
 
 const baseUrl = apiUrl + 'auth/';
 
 function SignIn({ navigation }) {
   const appContext = useContext(AppContext);
-  const { signed, setSigned, userData, setUserData } = appContext;
+  const { setSigned, userData, setUserData, setToken, setUserId, setIsAdmin } = appContext;
   const [fetched, setFetched] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSignIn = () => {
     setFetched(false);
-    console.log(baseUrl);
 
     axios.post(baseUrl, {email: email, password: password}).then(response => {
       if (response.status === 201) {
         console.log('yeah, nos aceptaron');
         console.log('Id de usuario: ' + response.data.user.id);
-        /*
-        setCookie('userId', response.data.user.id, {
-          maxAge: 3600
-        });
 
-        setCookie('token', response.data.access_token + ':' + API_SECRET, {
-          maxAge: 3600
-        });
-
-        setCookie('is_admin', response.data.user.is_admin, {
-          maxAge: 3600
-        });
-        */
+        // Later will be setted as persistent data using sqlite3
+        setIsAdmin(response.data.user.is_admin);
+        setUserId(response.data.user.id);
+        setToken(response.data.access_token + ':' + API_SECRET);
 
         response.data.user.birthdate = response.data.user.birthdate.slice(0,10);
         setUserData({...userData, userInfo: response.data.user});

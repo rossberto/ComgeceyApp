@@ -3,12 +3,15 @@ import { StyleSheet, View, Text, StatusBar, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import axios from 'axios';
+import { API_SECRET } from "@env";
 import SignIn from './app/screens/SignIn';
 import HomeTabs from './app/screens/HomeTabs';
 import IdDataEdit from './app/screens/user-data-edit/IdDataEdit';
 import AddressDataEdit from './app/screens/user-data-edit/AddressDataEdit';
 import ProfessionalDataEdit from './app/screens/user-data-edit/ProfessionalDataEdit';
 import AppContext from './AppContext';
+
 
 const Stack = createStackNavigator();
 
@@ -38,10 +41,21 @@ function App() {
 
   const [signed, setSigned] = useState(false);
   const [userData, setUserData] = useState({});
+  const [token, setToken] = useState('');
+  const [userId, setUserId] = useState('');
+  const [isAdmin, setIsAdmin] = useState(0);
 
   useEffect(() => {
     console.log(userData);
   }, [userData]);
+
+  useEffect(() => {
+    if (token !== '') {
+      axios.defaults.headers = {
+          Authorization: token + ':' + API_SECRET
+      }
+    }
+  }, [token]);
 
   return (
     <AppContext.Provider
@@ -49,7 +63,13 @@ function App() {
         signed,
         setSigned,
         userData,
-        setUserData
+        setUserData,
+        userId,
+        setUserId,
+        token,
+        setToken,
+        isAdmin,
+        setIsAdmin
       }}
     >
     <NavigationContainer>
