@@ -43,10 +43,6 @@ function App() {
     console.log(userData);
   }, [userData]);
 
-  const handleSignIn = () => {
-    setSigned(true);
-  }
-
   return (
     <AppContext.Provider
       value={{

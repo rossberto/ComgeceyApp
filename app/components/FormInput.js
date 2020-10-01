@@ -10,8 +10,6 @@ function FormInput(props) {
 
   return (
     <View style={styles.container}>
-      {/*<Text style={styles.text}>{props.name}</Text>*/}
-      {/*value !== '' ? (<Text style={styles.text}>{props.name}</Text>) : null */}
       {<Text style={styles.text}>{value !== '' ? props.name : ''}</Text> }
       <TextInput
         style={styles.input}

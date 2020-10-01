@@ -30,7 +30,6 @@ function HomeTabs() {
               iconName = 'menu'
             }
 
-            // You can return any component that you like here!
             return <Icon style={{color: iconColor}} name={iconName} size={30} />;
           }
         })}

@@ -49,7 +49,6 @@ function SignIn({ navigation }) {
         setUserData({...userData, userInfo: response.data.user});
         setSigned(true);
 
-        //setUserSession(response.data.user);
         setFetched(true);
       } else {
         console.log('Usuario y/o contraseña incorrectos');
@@ -66,12 +65,10 @@ function SignIn({ navigation }) {
 
   function handleEmailChange(text) {
     setEmail(text);
-    console.log(text);
   }
 
   function handlePasswordChange(text) {
     setPassword(text);
-    console.log(text);
   }
 
   return(
