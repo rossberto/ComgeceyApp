@@ -3,13 +3,12 @@ import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-nati
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import axios from 'axios';
 import { apiUrl } from '../../apiUrl';
-import { API_SECRET } from "@env";
 import AppContext from '../../../AppContext';
 
 const baseUrl = apiUrl + 'users/';
 
 function AddressData({ navigation }) {
-  const [endpoint, setEndpoint] = useState('/mail');
+  const [endpoint, setEndpoint] = useState('/address');
   const { userId } = useContext(AppContext);
   const [info, setInfo] = useState({
     street: '',
