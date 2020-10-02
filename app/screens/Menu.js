@@ -8,7 +8,7 @@ function Menu() {
   const { setSigned, setUserData } = appContext;
 
   const handleSignOut = () => {
-    setUserData({});
+    //setUserData({});
     setSigned(false);
   }
 

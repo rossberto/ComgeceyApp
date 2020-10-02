@@ -1,9 +1,12 @@
-import React from 'react';
-import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity, Button, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import FormInput from '../../components/FormInput';
 
 function IdDataEdit({ navigation }) {
+  const [editInfo, setEditInfo] = useState({});
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -14,14 +17,74 @@ function IdDataEdit({ navigation }) {
     });
   }, [navigation]);
 
+  useEffect(() => {
+    console.log(editInfo);
+  }, [editInfo]);
+
+  function handleUserDataChange(id, val) {
+    console.log(id);
+    setEditInfo({...editInfo, [id]:val});
+  }
+
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    console.log(event);
+    console.log(selectedDate);
+    const currentDate = selectedDate || date;
+    //setShow(Platform.OS === 'android');
+    setDate(currentDate);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
+
   return (
     <ScrollView style={styles.section}>
-        <FormInput name="Nombre"></FormInput>
-        <FormInput name="Apellido Paterno"></FormInput>
-        <FormInput name="Apellido Materno"></FormInput>
-        <FormInput name="Fecha de Nacimiento"></FormInput>
-        <FormInput name="Estado de Nacimiento"></FormInput>
-        <FormInput name="Ciudad de Nacimiento"></FormInput>
+        <FormInput
+          id="name"
+          name="Nombre"
+          handleValueChange={handleUserDataChange}
+        />
+        <FormInput
+          id="father_lname"
+          name="Apellido Paterno"
+          handleValueChange={handleUserDataChange}
+        />
+        <FormInput
+          id="mother_lname"
+          name="Apellido Materno"
+          handleValueChange={handleUserDataChange}
+        />
+        <View onFocus={showDatepicker}>
+          <FormInput
+            id="birthdate"
+            name="Fecha de Nacimiento"
+            handleValueChange={handleUserDataChange}
+        />
+        </View>
+        <FormInput
+          id="state"
+          name="Estado de Nacimiento"
+          handleValueChange={handleUserDataChange}
+        />
+        <FormInput
+          id="city"
+          name="Ciudad de Nacimiento"
+          handleValueChange={handleUserDataChange}
+        />
+
+        {show ? (
+          <DateTimePicker
+            value={date}
+            mode={'date'}
+            is24Hour={true}
+            display="default"
+            onChange={showDatepicker}
+          />
+      ):null}
     </ScrollView>
   );
 }

@@ -55,11 +55,11 @@ function SignIn({ navigation }) {
     });
   }
 
-  function handleEmailChange(text) {
+  function handleEmailChange(id, text) {
     setEmail(text);
   }
 
-  function handlePasswordChange(text) {
+  function handlePasswordChange(id, text) {
     setPassword(text);
   }
 

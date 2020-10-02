@@ -5,7 +5,7 @@ function FormInput(props) {
   const [value, setValue] = useState('');
 
   useEffect(() => {
-    props.handleValueChange(value);
+    props.handleValueChange(props.id, value);
   }, [value]);
 
   return (
@@ -16,7 +16,7 @@ function FormInput(props) {
         placeholder={props.name}
         onChangeText={input => setValue(input)}
         value={value}
-        autoCompleteType={props.id}
+        autoCompleteType={'off'}
         secureTextEntry={props.id === 'password' ? true : false }
       />
     </View>
