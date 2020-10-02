@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity, Button
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import FormInput from '../../components/FormInput';
+import FormDateInput from '../../components/FormDateInput';
 
 function IdDataEdit({ navigation }) {
   const [editInfo, setEditInfo] = useState({});
@@ -23,6 +24,7 @@ function IdDataEdit({ navigation }) {
 
   function handleUserDataChange(id, val) {
     console.log(id);
+    console.log(val);
     setEditInfo({...editInfo, [id]:val});
   }
 
@@ -58,13 +60,11 @@ function IdDataEdit({ navigation }) {
           name="Apellido Materno"
           handleValueChange={handleUserDataChange}
         />
-        <View onFocus={showDatepicker}>
-          <FormInput
-            id="birthdate"
-            name="Fecha de Nacimiento"
-            handleValueChange={handleUserDataChange}
+        <FormDateInput
+          id="birthdate"
+          name="Fecha de Nacimiento"
+          handleValueChange={handleUserDataChange}
         />
-        </View>
         <FormInput
           id="state"
           name="Estado de Nacimiento"
@@ -75,16 +75,6 @@ function IdDataEdit({ navigation }) {
           name="Ciudad de Nacimiento"
           handleValueChange={handleUserDataChange}
         />
-
-        {show ? (
-          <DateTimePicker
-            value={date}
-            mode={'date'}
-            is24Hour={true}
-            display="default"
-            onChange={showDatepicker}
-          />
-      ):null}
     </ScrollView>
   );
 }
