@@ -3,16 +3,13 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-nativ
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-function FormInput(props) {
+function FormDateInput(props) {
   const [value, setValue] = useState('');
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date(props.value));
   const [dateText, setDateText] =  useState('');
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    console.log('En efecto Date');
-    console.log(date);
-    console.log(date.toString());
     props.handleValueChange(props.id, date);
     setDateText(date.toString())
   }, [date]);
@@ -69,4 +66,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default FormInput;
+export default FormDateInput;

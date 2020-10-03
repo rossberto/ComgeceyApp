@@ -27,7 +27,7 @@ function SignIn({ navigation }) {
   const handleSignIn = () => {
     setFetched(false);
 
-    axios.post(baseUrl, {email: email, password: password}).then(response => {
+    axios.post(baseUrl, {email: 'dev@rross.me', password: '1234'}).then(response => {
       if (response.status === 201) {
         console.log('yeah, nos aceptaron');
         console.log('Id de usuario: ' + response.data.user.id);

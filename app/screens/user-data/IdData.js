@@ -7,11 +7,13 @@ function IdData({ navigation }) {
   const appContext = useContext(AppContext);
   const { userInfo } = appContext.userData;
 
+  console.log(userInfo.birthdate);
+
   return (
     <View style={styles.section}>
       <View style={styles.header}>
         <Text style={styles.sectionheader}>Ficha de Identificación</Text>
-        <TouchableOpacity style={styles.navtouch} onPress={() => navigation.navigate('Ficha de Identificación', { name: 'Ficha de Identificación' })}>
+        <TouchableOpacity style={styles.navtouch} onPress={() => navigation.navigate('Ficha de Identificación', { userInfo: userInfo })}>
           <Icon style={styles.icon} name="edit" size={30} color="black" />
         </TouchableOpacity>
       </View>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 
 function FormInput(props) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(props.value);
 
   useEffect(() => {
     props.handleValueChange(props.id, value);

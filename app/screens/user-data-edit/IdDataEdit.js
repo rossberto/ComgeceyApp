@@ -5,8 +5,12 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import FormInput from '../../components/FormInput';
 import FormDateInput from '../../components/FormDateInput';
 
-function IdDataEdit({ navigation }) {
-  const [editInfo, setEditInfo] = useState({});
+function IdDataEdit({ route, navigation }) {
+  const { screenName } = route.params;
+  const { userInfo } = route.params;
+  const [editInfo, setEditInfo] = useState(userInfo);
+
+  //console.log(userInfo);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -23,56 +27,46 @@ function IdDataEdit({ navigation }) {
   }, [editInfo]);
 
   function handleUserDataChange(id, val) {
-    console.log(id);
-    console.log(val);
     setEditInfo({...editInfo, [id]:val});
   }
 
-  const [date, setDate] = useState(new Date(1598051730000));
-  const [show, setShow] = useState(false);
-
-  const onChange = (event, selectedDate) => {
-    console.log(event);
-    console.log(selectedDate);
-    const currentDate = selectedDate || date;
-    //setShow(Platform.OS === 'android');
-    setDate(currentDate);
-  };
-
-  const showDatepicker = () => {
-    setShow(true);
-  };
-
   return (
     <ScrollView style={styles.section}>
+        <Text>{screenName}</Text>
         <FormInput
           id="name"
           name="Nombre"
+          value={userInfo.name}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
           id="father_lname"
           name="Apellido Paterno"
+          value={userInfo.father_lname}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
           id="mother_lname"
           name="Apellido Materno"
+          value={userInfo.mother_lname}
           handleValueChange={handleUserDataChange}
         />
         <FormDateInput
           id="birthdate"
           name="Fecha de Nacimiento"
+          value={userInfo.birthdate}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
-          id="state"
+          id="birth_state"
           name="Estado de Nacimiento"
+          value={userInfo.birth_state}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
-          id="city"
+          id="birth_city"
           name="Ciudad de Nacimiento"
+          value={userInfo.birth_city}
           handleValueChange={handleUserDataChange}
         />
     </ScrollView>
