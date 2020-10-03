@@ -35,7 +35,7 @@ function ProfessionalData({ navigation }) {
       <View>
         <View style={styles.header}>
           <Text style={styles.sectionheader}>Profesional</Text>
-          <TouchableOpacity style={styles.navtouch} onPress={() => navigation.navigate('Profesional', { name: 'Profesional' })}>
+          <TouchableOpacity style={styles.navtouch} onPress={() => navigation.navigate('Profesional', { info })}>
             <Icon style={styles.icon} name="edit" size={30} color="black" />
           </TouchableOpacity>
         </View>

@@ -29,41 +29,40 @@ function IdDataEdit({ route, navigation }) {
 
   return (
     <ScrollView style={styles.section}>
-        <Text>{screenName}</Text>
         <FormInput
           id="name"
           name="Nombre"
-          value={userInfo.name}
+          value={editInfo.name}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
           id="father_lname"
           name="Apellido Paterno"
-          value={userInfo.father_lname}
+          value={editInfo.father_lname}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
           id="mother_lname"
           name="Apellido Materno"
-          value={userInfo.mother_lname}
+          value={editInfo.mother_lname}
           handleValueChange={handleUserDataChange}
         />
         <FormDateInput
           id="birthdate"
           name="Fecha de Nacimiento"
-          value={userInfo.birthdate}
+          value={editInfo.birthdate}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
           id="birth_state"
           name="Estado de Nacimiento"
-          value={userInfo.birth_state}
+          value={editInfo.birth_state}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
           id="birth_city"
           name="Ciudad de Nacimiento"
-          value={userInfo.birth_city}
+          value={editInfo.birth_city}
           handleValueChange={handleUserDataChange}
         />
     </ScrollView>

@@ -2,8 +2,79 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FormInput from '../../components/FormInput';
+import FormDateInput from '../../components/FormDateInput';
 
-function ProfessionalDataEdit({ navigation }) {
+const fields = [
+  {
+    id: 'school',
+    name:'Escuela donde estudió la licenciatura'
+  },
+  {
+    id: 'start_date',
+    name: 'Fecha de inicio de la licenciatura',
+    date: true
+  },
+  {
+    id: 'finish_date',
+    name: 'Fecha de término de la licenciatura',
+    date: true
+  },
+  {
+    id: 'tesis',
+    name: 'Título de la tesis'
+  },
+  {
+    id: 'exam_type',
+    name: 'Tipo de examen (oral/escrito)'
+  },
+  {
+    id: 'professional_id',
+    name: 'Cédula profesional'
+  },
+  {
+    id: 'professional_id_date',
+    name: 'Fecha de expedición de la cédula',
+    date: true
+  },
+  {
+    id: 'book',
+    name: 'Libro, fojas y número'
+  },
+  {
+    id: 'intership',
+    name: 'Sitio donde realizó el internado'
+  },
+  {
+    id: 'start_date_internship',
+    name: 'Fecha de inicio del internado',
+    date: true
+  },
+  {
+    id: 'finish_date_internship',
+    name: 'Fecha de término del internado',
+    date: true
+  },
+  {
+    id: 'social_service',
+    name: 'Lugar donde realizó el servicio social'
+  },
+  {
+    id: 'start_date_social',
+    name: 'Fecha de inicio del servicio social',
+    date: true
+  },
+  {
+    id: 'finish_date_social',
+    name: 'Fecha de término del servicio social',
+    date: true
+  }
+];
+
+function ProfessionalDataEdit({ route, navigation }) {
+  const { info } = route.params;
+  const [editInfo, setEditInfo] = useState(info);
+  console.log(info);
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -14,24 +85,31 @@ function ProfessionalDataEdit({ navigation }) {
     });
   }, [navigation]);
 
+  function handleUserDataChange(id, val) {
+    setEditInfo({...editInfo, [id]:val});
+  }
+
   return (
     <ScrollView style={styles.section}>
-        <FormInput name="Escuela donde estudió la licenciatura"></FormInput>
-        <FormInput name="Fecha de inicio de la licenciatura"></FormInput>
-        <FormInput name="Fecha de término de la licenciatura"></FormInput>
-        <FormInput name="Título de la tesis"></FormInput>
-        <FormInput name="Tipo de examen (oral/escrito)"></FormInput>
-        <FormInput name="Cédula profesional"></FormInput>
-        <FormInput name="Fecha de expedición de la cédula"></FormInput>
-        <FormInput name="Libro, fojas y número"></FormInput>
+      {
+        fields.map((field) => field.date ?
+            <FormDateInput
+              key={field.id}
+              id={field.id}
+              name={field.name}
+              value={editInfo[field.id]}
+              handleValueChange={handleUserDataChange}
+            /> :
+            <FormInput
+              key={field.id}
+              id={field.id}
+              name={field.name}
+              value={editInfo[field.id]}
+              handleValueChange={handleUserDataChange}
+            />
+        )
+      }
 
-        <FormInput name="Sitio donde realizó el internado"></FormInput>
-        <FormInput name="Fecha de inicio del internado"></FormInput>
-        <FormInput name="Fecha de término del internado"></FormInput>
-
-        <FormInput name="Lugar donde realizó el servicio social"></FormInput>
-        <FormInput name="Fecha de inicio del servicio social"></FormInput>
-        <FormInput name="Fecha de término del servicio social"></FormInput>
     </ScrollView>
   );
 }
