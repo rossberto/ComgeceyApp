@@ -4,7 +4,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import FormInput from '../../components/FormInput';
 
 
-function AddressDataEdit({ navigation }) {
+function AddressDataEdit({ route, navigation }) {
+  const { info } = route.params;
+  const [editInfo, setEditInfo] = useState(info);
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -15,15 +18,54 @@ function AddressDataEdit({ navigation }) {
     });
   }, [navigation]);
 
+  function handleUserDataChange(id, val) {
+    setEditInfo({...editInfo, [id]:val});
+  }
+
   return (
     <ScrollView style={styles.section}>
-        <FormInput name="Calle"></FormInput>
-        <FormInput name="Número"></FormInput>
-        <FormInput name="Colonia"></FormInput>
-        <FormInput name="Código Postal"></FormInput>
-        <FormInput name="Ciudad"></FormInput>
-        <FormInput name="Estado"></FormInput>
-        <FormInput name="Número de Teléfono"></FormInput>
+        <FormInput
+          id="street"
+          name="Calle"
+          value={info.street}
+          handleValueChange={handleUserDataChange}
+        />
+        <FormInput
+          id="number"
+          name="Número"
+          value={info.number}
+          handleValueChange={handleUserDataChange}
+        />
+        <FormInput
+          id="town"
+          name="Colonia"
+          value={info.town}
+          handleValueChange={handleUserDataChange}
+        />
+        <FormInput
+          id="zip_code"
+          name="Código Postal"
+          value={info.zip_code}
+          handleValueChange={handleUserDataChange}
+        />
+        <FormInput
+          id="city"
+          name="Ciudad"
+          value={info.city}
+          handleValueChange={handleUserDataChange}
+        />
+        <FormInput
+          id="state"
+          name="Estado"
+          value={info.state}
+          handleValueChange={handleUserDataChange}
+        />
+        <FormInput
+          id="phone"
+          name="Número de Teléfono"
+          value={info.phone}
+          handleValueChange={handleUserDataChange}
+        />
     </ScrollView>
   );
 }

@@ -6,11 +6,8 @@ import FormInput from '../../components/FormInput';
 import FormDateInput from '../../components/FormDateInput';
 
 function IdDataEdit({ route, navigation }) {
-  const { screenName } = route.params;
   const { userInfo } = route.params;
   const [editInfo, setEditInfo] = useState(userInfo);
-
-  //console.log(userInfo);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({

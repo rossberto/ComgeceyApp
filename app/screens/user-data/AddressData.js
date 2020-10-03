@@ -40,7 +40,7 @@ function AddressData({ navigation }) {
     <View style={styles.section}>
       <View style={styles.header}>
         <Text style={styles.sectionheader}>Domicilio</Text>
-        <TouchableOpacity style={styles.navtouch} onPress={() => navigation.navigate('Domicilio', { name: 'Domicilio' })} >
+        <TouchableOpacity style={styles.navtouch} onPress={() => navigation.navigate('Domicilio', { info })} >
           <Icon style={styles.icon} name="edit" size={30} color="black" />
         </TouchableOpacity>
       </View>
