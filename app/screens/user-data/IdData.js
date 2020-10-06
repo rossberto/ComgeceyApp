@@ -7,8 +7,6 @@ function IdData({ navigation }) {
   const appContext = useContext(AppContext);
   const { userInfo } = appContext.userData;
 
-  console.log(userInfo.birthdate);
-
   return (
     <View style={styles.section}>
       <View style={styles.header}>

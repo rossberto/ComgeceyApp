@@ -1,18 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity, Button, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import axios from 'axios';
 import FormInput from '../../components/FormInput';
 import FormDateInput from '../../components/FormDateInput';
+import { apiUrl } from '../../apiUrl';
+import AppContext from '../../../AppContext';
+
+const baseUrl = apiUrl + 'users/';
 
 function IdDataEdit({ route, navigation }) {
   const { userInfo } = route.params;
+  const { userData, setUserData } = useContext(AppContext);
   const [editInfo, setEditInfo] = useState(userInfo);
+  const [pressed, setPressed] = useState(false);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.navtouch}>
+        <TouchableOpacity onPress={() => setPressed(true)} style={styles.navtouch}>
           <Icon style={styles.icon} name="save" size={30} color="black" />
         </TouchableOpacity>
       ),
@@ -20,8 +27,18 @@ function IdDataEdit({ route, navigation }) {
   }, [navigation]);
 
   useEffect(() => {
-    console.log(editInfo);
-  }, [editInfo]);
+    function handleSave(e) {
+      const url = baseUrl + userInfo.id;
+      axios.put(url, editInfo).then(response => {
+        setUserData({...userData, userInfo:editInfo});
+        navigation.goBack();
+      });
+    }
+
+    if(pressed) {
+      handleSave();
+    }
+  }, [pressed]);
 
   function handleUserDataChange(id, val) {
     setEditInfo({...editInfo, [id]:val});
