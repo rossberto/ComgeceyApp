@@ -16,8 +16,6 @@ function AddressData({ navigation }) {
 
     axios.get(url).then(response => {
       setUserData({...userData, [endpoint]:response.data[endpoint]});
-
-      //setFetched(true);
     }).catch(err => {
       console.log(err);
     });

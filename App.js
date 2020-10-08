@@ -39,15 +39,14 @@ const screens = [
 function App() {
   const appContext = useContext(AppContext);
 
-  const [signed, setSigned] = useState(false);
   const [userData, setUserData] = useState({});
+  const [address, setAddress] = useState({});
+  const [mail, setMail] = useState({});
+  const [professional, setProfessional] = useState({});
+  const [signed, setSigned] = useState(false);
   const [token, setToken] = useState('');
   const [userId, setUserId] = useState('');
   const [isAdmin, setIsAdmin] = useState(0);
-
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
 
   useEffect(() => {
     if (token !== '') {
@@ -69,7 +68,9 @@ function App() {
         token,
         setToken,
         isAdmin,
-        setIsAdmin
+        setIsAdmin,
+        professional,
+        setProfessional
       }}
     >
     <NavigationContainer>

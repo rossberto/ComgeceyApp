@@ -11,7 +11,7 @@ function FormDateInput(props) {
 
   useEffect(() => {
     props.handleValueChange(props.id, date);
-    setDateText(date.toString())
+    setDateText(date.toISOString().slice(0, 10));
   }, [date]);
 
   function handleDateChange(event, input) {

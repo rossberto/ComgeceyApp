@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import axios from 'axios';
 import FormInput from '../../components/FormInput';
 import FormDateInput from '../../components/FormDateInput';
+import { apiUrl } from '../../apiUrl';
+import AppContext from '../../../AppContext';
+
+const baseUrl = apiUrl + 'users/';
 
 const fields = [
   {
@@ -71,21 +76,46 @@ const fields = [
 ];
 
 function ProfessionalDataEdit({ route, navigation }) {
-  const { info } = route.params;
-  const [editInfo, setEditInfo] = useState(info);
-  console.log(info);
+  console.log(route.params);
+  const { professional } = route.params;
+  const { userId, setProfessional } = useContext(AppContext);
+  const [editInfo, setEditInfo] = useState(professional);
+  const [pressed, setPressed] = useState(false);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.navtouch}>
+        <TouchableOpacity onPress={() => setPressed(true)} style={styles.navtouch}>
           <Icon style={styles.icon} name="save" size={30} color="black" />
         </TouchableOpacity>
       ),
     });
   }, [navigation]);
 
+  useEffect(() => {
+    function handleSave(e) {
+      const url = baseUrl + userId + '/professional';
+
+      axios.put(url, editInfo).then(response => {
+        setProfessional(editInfo);
+        navigation.goBack();
+      });
+    }
+
+    if(pressed) {
+      handleSave();
+    }
+  }, [pressed]);
+
   function handleUserDataChange(id, val) {
+    console.log('a punto de ver cambio', val);
+    /*
+    const dates = ['start_date', 'finish_date', 'start_date_internship', 'finish_date_internship', 'start_date_social', 'finish_date_social', 'exam_date', 'professional_id_date'];
+    if(dates.includes(id)) {
+      val = val.toISOString().slice(0, 10);
+    }
+    */
+
     setEditInfo({...editInfo, [id]:val});
   }
 

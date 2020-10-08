@@ -17,6 +17,35 @@ import { API_SECRET } from "@env";
 
 const baseUrl = apiUrl + 'auth/';
 
+const addressInfo = {
+  street: '',
+  number: '',
+  town: '',
+  city: '',
+  state: '',
+  zip_code: '',
+  phone: ''
+}
+
+const professionalInfo = {
+  school: '',
+  start_date: '',
+  finish_date: '',
+  intership: '',
+  start_date_internship: '',
+  finish_date_internship: '',
+  social_service: '',
+  start_date_social: '',
+  finish_date_social: '',
+  exam_date: '',
+  exam_type: '',
+  tesis: '',
+  professional_id: '',
+  professional_id_date: '',
+  book: '',
+  ssa: ''
+}
+
 function SignIn({ navigation }) {
   const appContext = useContext(AppContext);
   const { setSigned, userData, setUserData, setToken, setUserId, setIsAdmin } = appContext;
@@ -30,7 +59,6 @@ function SignIn({ navigation }) {
     axios.post(baseUrl, {email: 'dev@rross.me', password: '1234'}).then(response => {
       if (response.status === 201) {
         console.log('yeah, nos aceptaron');
-        console.log('Id de usuario: ' + response.data.user.id);
 
         // Later will be setted as persistent data using sqlite3
         setIsAdmin(response.data.user.is_admin);
@@ -38,26 +66,11 @@ function SignIn({ navigation }) {
         setToken(response.data.access_token + ':' + API_SECRET);
 
         response.data.user.birthdate = response.data.user.birthdate.slice(0,10);
-        setUserData({...userData,
+        setUserData({
           userInfo: response.data.user,
-          address:{
-            street: '',
-            number: '',
-            town: '',
-            city: '',
-            state: '',
-            zip_code: '',
-            phone: ''
-          },
-          mail:{
-            street: '',
-            number: '',
-            town: '',
-            city: '',
-            state: '',
-            zip_code: '',
-            phone: ''
-          }
+          address: addressInfo,
+          mail: addressInfo,
+          professional: professionalInfo
         });
         setSigned(true);
 
