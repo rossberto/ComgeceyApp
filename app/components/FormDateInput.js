@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   columns: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   text: {
     fontSize: 12,
@@ -57,12 +58,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgray',
     borderColor: 'black',
     borderWidth: 1,
-    borderRadius: 5
+    borderRadius: 5,
+    marginRight: 1,
+    width: 290
   },
   navtouch: {
     justifyContent: 'center',
-    paddingTop: 19,
-    paddingHorizontal: 5
+    paddingTop: 19
   }
 });
 

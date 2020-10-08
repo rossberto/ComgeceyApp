@@ -76,7 +76,6 @@ const fields = [
 ];
 
 function ProfessionalDataEdit({ route, navigation }) {
-  console.log(route.params);
   const { professional } = route.params;
   const { userId, setProfessional } = useContext(AppContext);
   const [editInfo, setEditInfo] = useState(professional);
@@ -108,14 +107,6 @@ function ProfessionalDataEdit({ route, navigation }) {
   }, [pressed]);
 
   function handleUserDataChange(id, val) {
-    console.log('a punto de ver cambio', val);
-    /*
-    const dates = ['start_date', 'finish_date', 'start_date_internship', 'finish_date_internship', 'start_date_social', 'finish_date_social', 'exam_date', 'professional_id_date'];
-    if(dates.includes(id)) {
-      val = val.toISOString().slice(0, 10);
-    }
-    */
-
     setEditInfo({...editInfo, [id]:val});
   }
 
