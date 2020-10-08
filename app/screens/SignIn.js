@@ -38,7 +38,27 @@ function SignIn({ navigation }) {
         setToken(response.data.access_token + ':' + API_SECRET);
 
         response.data.user.birthdate = response.data.user.birthdate.slice(0,10);
-        setUserData({...userData, userInfo: response.data.user});
+        setUserData({...userData,
+          userInfo: response.data.user,
+          address:{
+            street: '',
+            number: '',
+            town: '',
+            city: '',
+            state: '',
+            zip_code: '',
+            phone: ''
+          },
+          mail:{
+            street: '',
+            number: '',
+            town: '',
+            city: '',
+            state: '',
+            zip_code: '',
+            phone: ''
+          }
+        });
         setSigned(true);
 
         setFetched(true);

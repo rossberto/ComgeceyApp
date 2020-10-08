@@ -8,27 +8,14 @@ import AppContext from '../../../AppContext';
 const baseUrl = apiUrl + 'users/';
 
 function AddressData({ navigation }) {
-  const [endpoint, setEndpoint] = useState('/address');
-  const { userId } = useContext(AppContext);
-  const [info, setInfo] = useState({
-    street: '',
-    number: '',
-    town: '',
-    city: '',
-    state: '',
-    zip_code: '',
-    phone: ''
-  });
+  const [endpoint, setEndpoint] = useState('address');
+  const { userId, userData, setUserData } = useContext(AppContext);
 
   useEffect(() => {
-    const url = baseUrl + userId + endpoint;
+    const url = baseUrl + userId + '/' + endpoint;
 
     axios.get(url).then(response => {
-      if (Object.keys(response.data)[0] === 'address') {
-        setInfo(response.data.address);
-      } else if (Object.keys(response.data)[0] === 'mail') {
-        setInfo(response.data.mail);
-      }
+      setUserData({...userData, [endpoint]:response.data[endpoint]});
 
       //setFetched(true);
     }).catch(err => {
@@ -40,18 +27,18 @@ function AddressData({ navigation }) {
     <View style={styles.section}>
       <View style={styles.header}>
         <Text style={styles.sectionheader}>Domicilio</Text>
-        <TouchableOpacity style={styles.navtouch} onPress={() => navigation.navigate('Domicilio', { info })} >
+        <TouchableOpacity style={styles.navtouch} onPress={() => navigation.navigate('Domicilio', { endpoint })} >
           <Icon style={styles.icon} name="edit" size={30} color="black" />
         </TouchableOpacity>
       </View>
       <View style={styles.selector}>
-        <Text style={endpoint === '/address' ? styles.selected : {color: '#7a6800'}} onPress={() => setEndpoint('/address')}>Particular</Text>
-        <Text style={endpoint === '/mail' ? styles.selected : {color: '#7a6800'}} onPress={() => setEndpoint('/mail')}>Correspondencia</Text>
+        <Text style={endpoint === 'address' ? styles.selected : {color: '#7a6800'}} onPress={() => setEndpoint('address')}>Particular</Text>
+        <Text style={endpoint === 'mail' ? styles.selected : {color: '#7a6800'}} onPress={() => setEndpoint('mail')}>Correspondencia</Text>
       </View>
       <View>
-        <Text>{info.street} #{info.number}, {info.town}</Text>
-        <Text>CP {info.zip_code}, {info.city}, {info.state}</Text>
-        <Text>{info.phone}</Text>
+        <Text>{userData[endpoint].street} #{userData[endpoint].number}, {userData[endpoint].town}</Text>
+        <Text>CP {userData[endpoint].zip_code}, {userData[endpoint].city}, {userData[endpoint].state}</Text>
+        <Text>{userData[endpoint].phone}</Text>
       </View>
     </View>
   );

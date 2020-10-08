@@ -1,22 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import axios from 'axios';
 import FormInput from '../../components/FormInput';
+import { apiUrl } from '../../apiUrl';
+import AppContext from '../../../AppContext';
 
+const baseUrl = apiUrl + 'users/';
 
 function AddressDataEdit({ route, navigation }) {
-  const { info } = route.params;
-  const [editInfo, setEditInfo] = useState(info);
+  const { endpoint } = route.params;
+  const { userId, userData, setUserData } = useContext(AppContext);
+  const [editInfo, setEditInfo] = useState(userData[endpoint]);
+  const [pressed, setPressed] = useState(false);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.navtouch}>
+        <TouchableOpacity onPress={() => setPressed(true)} style={styles.navtouch}>
           <Icon style={styles.icon} name="save" size={30} color="black" />
         </TouchableOpacity>
       ),
     });
   }, [navigation]);
+
+  useEffect(() => {
+    function handleSave(e) {
+      const url = baseUrl + userId + '/' + endpoint;
+      axios.put(url, editInfo).then(response => {
+        setUserData({...userData, [endpoint]:editInfo});
+        navigation.goBack();
+      });
+    }
+
+    if(pressed) {
+      handleSave();
+    }
+  }, [pressed]);
 
   function handleUserDataChange(id, val) {
     setEditInfo({...editInfo, [id]:val});
@@ -27,43 +47,43 @@ function AddressDataEdit({ route, navigation }) {
         <FormInput
           id="street"
           name="Calle"
-          value={info.street}
+          value={userData[endpoint].street}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
           id="number"
           name="Número"
-          value={info.number}
+          value={userData[endpoint].number}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
           id="town"
           name="Colonia"
-          value={info.town}
+          value={userData[endpoint].town}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
           id="zip_code"
           name="Código Postal"
-          value={info.zip_code}
+          value={userData[endpoint].zip_code}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
           id="city"
           name="Ciudad"
-          value={info.city}
+          value={userData[endpoint].city}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
           id="state"
           name="Estado"
-          value={info.state}
+          value={userData[endpoint].state}
           handleValueChange={handleUserDataChange}
         />
         <FormInput
           id="phone"
           name="Número de Teléfono"
-          value={info.phone}
+          value={userData[endpoint].phone}
           handleValueChange={handleUserDataChange}
         />
     </ScrollView>
